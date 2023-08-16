@@ -1,9 +1,7 @@
-﻿using BlazorExample.Shared.Comparers;
-using BlazorExample.Shared.Extensions;
+﻿using BlazorExample.Shared.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
-using Tweetinvi.Models.V2;
 
 namespace BlazorExample.Components.Components.Dashboards;
 
@@ -13,8 +11,8 @@ public partial class LatestUmbracoTweets : ComponentBase
     [Inject] public NavigationManager NavigationManager { get; set; }
     [Inject] public IJSRuntime JS { get; set; }
 
-    private string? BaseUri { get; set; }
-    private IEnumerable<TweetV2> Tweets { get; set; }
+    private string BaseUri { get; set; }
+    private IEnumerable<string> Tweets { get; set; }
 
     private bool Loading { get; set; }
     private bool HasSettings { get; set; }
@@ -22,7 +20,7 @@ public partial class LatestUmbracoTweets : ComponentBase
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        Tweets = new List<TweetV2>();
+        Tweets = new List<string>();
         BaseUri = NavigationManager.BaseUri;
         if (BaseUri.Contains("umbraco"))
         {
@@ -57,8 +55,8 @@ public partial class LatestUmbracoTweets : ComponentBase
         StateHasChanged();
         var json = await HttpClient.GetStringAsync($"{BaseUri}umbraco/backoffice/api/TwitterApi/GetUmbracoTweets");
         json = json.RemoveUmbracoAngularStartJson();
-        var newTweets = JsonConvert.DeserializeObject<IEnumerable<TweetV2>>(json);
-        Tweets = Tweets.Union(newTweets, new TweetComparer()).OrderByDescending(x => x.CreatedAt); 
+        var newTweets = JsonConvert.DeserializeObject<IEnumerable<string>>(json);
+        Tweets = Tweets.Union(newTweets).OrderDescending();
         Loading = false;
         await JS.InvokeVoidAsync("notificationsService.success", "Updated", "latest tweets added");
     }

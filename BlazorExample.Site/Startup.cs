@@ -64,6 +64,8 @@ namespace BlazorExample.Site
                 app.UseWebAssemblyDebugging();
             }
 
+            app.UseBlazorFrameworkFiles();
+
             app.UseUmbraco()
                 .WithMiddleware(u =>
                 {
@@ -76,8 +78,6 @@ namespace BlazorExample.Site
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                 });
-
-            app.UseBlazorFrameworkFiles();
         }
     }
 }

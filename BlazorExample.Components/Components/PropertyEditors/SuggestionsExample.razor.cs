@@ -13,8 +13,8 @@ public partial class SuggestionsExample : ComponentBase
 {
     [Inject] public IJSRuntime JS { get; set; }
     [Inject] public HttpClient HttpClient { get; set; }
-    private string? _suggestionValue;
-    private readonly List<string?> _suggestions = new()
+    private string _suggestionValue;
+    private readonly List<string> _suggestions = new()
     {
         "You should take a break",
         "I suggest that you visit the Eiffel Tower",

@@ -1,22 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:55697",
-      "sslPort": 44383
-    }
-  },
+  // start chrome http://localhost:5000; dotnet watch -v run --environment Development
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "Umbraco.Web.UI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
@@ -25,7 +10,7 @@
       "applicationUrl": "https://localhost:44383;http://localhost:55697",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }      
+      }
     }
   }
 }
